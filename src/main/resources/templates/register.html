@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regisztráció</title>
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+<body>
+<header>
+    <div class="logo">Iskolai Napló</div>
+    <nav id="navbar">
+        <ul>
+            <li><a href="home.html">Főoldal</a></li>
+            <li><a href="login.html">Bejelentkezés</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="page">
+
+        <div class="register-container">
+            <div class="register-box">
+                <h2>Felhasználó Regisztráció</h2>
+                <form action="#" th:action="@{/register}" method="post">
+                    <div class="form-group">
+                        <label for="nev">Teljes Név:</label>
+                        <input type="text" id="nev" name="nev" required placeholder="Adja meg a teljes nevét">
+                    </div>
+                    <div class="form-group">
+                        <label for="felhasznalo_nev">Felhasználónév:</label>
+                        <input type="text" id="felhasznalo_nev" name="felhasznalo_nev" required placeholder="Felhasználónév">
+                    </div>
+                    <div class="form-group">
+                        <label for="jelszo">Jelszó:</label>
+                        <input type="password" id="jelszo" name="jelszo" required placeholder="Jelszó">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Regisztráció</button>
+                    </div>
+                </form>
+
+                <div th:if="${errorMessage}" class="error">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+
+                <div class="login-redirect">
+                    <p>Már van fiókja? <a href="login.html">Jelentkezzen be itt!</a></p>
+                </div>
+            </div>
+        </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2024 Gimnáziumi Naplókezelő Rendszer. Minden jog fenntartva.</p>
+</footer>
+</body>
+</html>

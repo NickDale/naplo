@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <link rel="stylesheet" href="../templates/admin/style.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 <header>
     <div class="logo">Iskolai Napló</div>
     <nav id="navbar">
         <ul>
-            <li><a href="#">Főoldal</a></li>
-            <li><a href="#" id="regLink">Regisztráció</a></li>
-            <li><a href="#" id="loginLink">Bejelentkezés</a></li>
-            <li><a href="#" id="logoutLink" style="display:none;">Kilépés</a></li>
+            <li><a href="register.html">Regisztráció</a></li>
+            <li><a href="login.html">Bejelentkezés</a></li>
         </ul>
     </nav>
+
     <div class="user-info" id="userInfo" style="display:none;">
         Üdvözöljük, <span id="userName">Felhasználó</span>!
     </div>
@@ -26,7 +25,7 @@
     <div class="hero-content">
         <h1>Iskolai Naplókezelő Rendszer</h1>
         <p>Egyszerű, hatékony és biztonságos megoldás az iskolai naplók kezelésére.</p>
-        <a href="#" class="cta-button">Tudjon meg többet!</a>
+        <a href="login.html" class="cta-button">Tudjon meg többet!</a>
     </div>
 </section>
 
@@ -52,6 +51,8 @@
     <p>&copy; 2024 Gimnáziumi Naplókezelő Rendszer. Minden jog fenntartva.</p>
 </footer>
 
-<script src="../templates/admin/scripts.js"></script>
+<script th:inline="javascript">
+    const isLoggedIn = /*[[${#httpServletRequest.remoteUser != null}]]*/ false;
+</script>
 </body>
 </html>

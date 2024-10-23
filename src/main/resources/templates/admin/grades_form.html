@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tantárgyak Listája</title>
+    <meta charset ="utf-8">
+    <title>Jegy Hozzáadása</title>
     <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
@@ -19,6 +18,9 @@
                 <a th:href="@{/admin/students}">Diákok</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
+                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+            </li>
+            <li th:if="${#httpServletRequest.remoteUser != null}">
                 <a th:href="@{/admin/grades}">Jegyek</a>
             </li>
         </ul>
@@ -28,25 +30,23 @@
         Üdvözöljük, <span id="userName">Felhasználó</span>!
     </div>
 </header>
-
 <section class="page">
-    <h1>Tantárgyak</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Tantárgy Név</th>
-            <th>Kategória</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="subject : ${subjects}">
-            <td th:text="${subject.name}"></td>
-            <td th:text="${subject.category}"></td>
-        </tr>
-        </tbody>
-    </table>
-</section>
 
+    <div class="register-container">
+        <div class="register-box">
+<h1>Új Jegy Hozzáadása</h1>
+<form th:action="@{/grades}" method="post">
+    <label>Diák:</label>
+    <input type="text" name="studentId" /><br />
+    <label>Tantárgy:</label>
+    <input type="text" name="subjectId" /><br />
+    <label>Jegy:</label>
+    <input type="number" name="value" /><br />
+    <button type="submit">Hozzáadás</button>
+</form>
+        </div>
+    </div>
+</section>
 <footer>
     <p>&copy; 2024 Gimnáziumi Naplókezelő Rendszer. Minden jog fenntartva.</p>
 </footer>
