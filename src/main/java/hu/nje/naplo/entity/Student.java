@@ -40,6 +40,6 @@ public class Student extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, studentName, className, gender);
+        return Objects.hash(id, studentName, className, men);
     }
 }

@@ -14,17 +14,18 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public List<?> listStudents() {
-        //TODO: implement!
-        return null;
+        return studentRepository.findAll();
     }
 
     public Object findById(int studentId) {
-         //TODO: implement!
-        return null;
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("Diák nem található az adott ID-val: " + studentId));
     }
 
-    public void deleteStudentById(final int studentId) {
-       //TODO: implement!
-        throw InvalidAlgorithmParameterException();
+    public void deleteStudentById(final int studentId) throws InvalidAlgorithmParameterException {
+        if (!studentRepository.existsById(studentId)) {
+            throw new InvalidAlgorithmParameterException("Diák nem található az adott ID-val: " + studentId);
+        }
+        studentRepository.deleteById(studentId);
     }
 }
