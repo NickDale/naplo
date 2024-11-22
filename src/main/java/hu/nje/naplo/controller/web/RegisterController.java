@@ -1,6 +1,7 @@
 package hu.nje.naplo.controller.web;
 
 import hu.nje.naplo.entity.User;
+import hu.nje.naplo.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,20 +17,20 @@ public class RegisterController {
         return "register";
     }
 
+    private UserRepository userRepository;
+
     @PostMapping("/register")
     public String register(@ModelAttribute("felhasznalo") User felhasznalo,
                            Model model) {
-//        // Ellenőrzések (pl. meglévő felhasználónév ellenőrzése)
-//        if (/* felhasználónév már létezik */) {
-//            model.addAttribute("errorMessage", "A felhasználónév már létezik.");
-//            return "register";
-//        }
+        if (userRepository.findByUsername(felhasznalo.getUsername()).isPresent()) {
+                model.addAttribute("errorMessage", "A felhasználónév már létezik.");
+                return "register";
+            }
+            felhasznalo.setRole("USER");
+            felhasznalo.setActive(true);
+            userRepository.save(felhasznalo);
+            return "redirect:/login";
 
-//        // Jelszó hashelése, adatbázis mentés (példa)
-//        felhasznalo.setJelszo(passwordEncoder.encode(felhasznalo.getJelszo()));
-//        felhasznaloRepository.save(felhasznalo);
-
-        return "redirect:/login";
     }
 }
 

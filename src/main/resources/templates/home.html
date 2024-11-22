@@ -17,7 +17,7 @@
     </nav>
 
     <div class="user-info" id="userInfo" style="display:none;">
-        Üdvözöljük, <span id="userName">Felhasználó</span>!
+        Üdvözöljük, <span id="userName" th:text="${User.name}">Felhasználó</span>!
     </div>
 </header>
 
@@ -52,7 +52,10 @@
 </footer>
 
 <script th:inline="javascript">
-    const isLoggedIn = /*[[${#httpServletRequest.remoteUser != null}]]*/ false;
+
+    /*<![CDATA[*/
+    const isLoggedIn = [[$,{#httpServletRequest:remoteUser != null}]];
+    /*]]>*/
 </script>
 </body>
 </html>
