@@ -33,14 +33,18 @@ public class User extends AbstractEntity {
     @Column(name = "jelszo", nullable = false, length = 40)
     private String password;
 
-    public static @Size(max = 10) @NotNull String getRole() {
-        return role;
+    public static void setRole(@Size(max = 10) @NotNull String role) {
+        User.role = role;
     }
 
     @Size(max = 10)
     @NotNull
     @Column(name = "jogosultsag", nullable = false, length = 10)
-    private String role;
+    private static String role;
+
+    public static @Size(max = 10) @NotNull String getRole() {
+        return role;
+    }
 
     @ColumnDefault("1")
     @Column(name = "aktiv")

@@ -26,7 +26,7 @@ public class RegisterController {
                 model.addAttribute("errorMessage", "A felhasználónév már létezik.");
                 return "register";
             }
-            felhasznalo.setRole("USER");
+            User.setRole("USER");
             felhasznalo.setActive(true);
             userRepository.save(felhasznalo);
             return "redirect:/login";
