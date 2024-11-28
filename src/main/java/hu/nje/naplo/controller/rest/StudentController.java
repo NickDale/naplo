@@ -2,9 +2,13 @@ package hu.nje.naplo.controller.rest;
 
 import hu.nje.naplo.entity.Student;
 import hu.nje.naplo.repository.StudentRepository;
+import hu.nje.naplo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,4 +55,34 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/delete/{id}")
+    public String confirmDeleteStudent(@PathVariable("id") Integer id, Model model) {
+        Optional<Student> student = studentRepository.findById(id);
+        if (student.isPresent()) {
+            model.addAttribute("student", student.get());
+            return "delete_student";
+        } else {
+            model.addAttribute("error", "A megadott ID-val nem található diák.");
+            return "error";
+        }
+    }
+
+//    @PostMapping("/delete/{id}")
+//    public String deleteStudent(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+//        boolean success = studentRepository.deleteById(id);
+//        if (success) {
+//            redirectAttributes.addFlashAttribute("message", "Diák sikeresen törölve.");
+//            return "redirect:/students/list";
+//        } else {
+//            redirectAttributes.addFlashAttribute("error", "Hiba történt a törlés során.");
+//            return "redirect:/students/list";
+//        }
+//    }
+
+//    @GetMapping("/classes")
+//    public String getClasses(Model model) {
+//        List<String> classes = StudentRepository.findByClassName();
+//        model.addAttribute("classes", classes);
+//        return "add_student"; // A nézet neve
+//    }
 }

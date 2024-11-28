@@ -36,4 +36,6 @@ public class Subject extends AbstractEntity {
     public int hashCode() {
         return Objects.hash(id,name, category);
     }
+
+
 }

@@ -19,4 +19,24 @@ public class AdminController {
     public String subjectCreation(Model model) {
         return "redirect:admin/subjects";
     }
+
+    @GetMapping(path = "/students")
+    public String students(Model model) {
+        return "admin/students";
+    }
+
+    @PostMapping(path = "/students")
+    public String sudentCreation(Model model) {
+        return "redirect:admin/students";
+    }
+
+    @GetMapping(path = "/grades")
+    public String grades(Model model) {
+        return "admin/grades";
+    }
+
+    @PostMapping(path = "/grades")
+    public String gradesCreation(Model model) {
+        return "redirect:admin/grades";
+    }
 }

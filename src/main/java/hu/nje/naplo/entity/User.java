@@ -33,6 +33,10 @@ public class User extends AbstractEntity {
     @Column(name = "jelszo", nullable = false, length = 40)
     private String password;
 
+    public static @Size(max = 10) @NotNull String getRole() {
+        return role;
+    }
+
     @Size(max = 10)
     @NotNull
     @Column(name = "jogosultsag", nullable = false, length = 10)
