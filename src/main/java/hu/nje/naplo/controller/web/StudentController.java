@@ -1,14 +1,11 @@
-package hu.nje.naplo.controller.rest;
+package hu.nje.naplo.controller.web;
 
 import hu.nje.naplo.entity.Student;
 import hu.nje.naplo.repository.StudentRepository;
-import hu.nje.naplo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;

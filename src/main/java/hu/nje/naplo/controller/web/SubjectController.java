@@ -1,4 +1,4 @@
-package hu.nje.naplo.controller.rest;
+package hu.nje.naplo.controller.web;
 
 import hu.nje.naplo.entity.Subject;
 import hu.nje.naplo.repository.SubjectRepository;

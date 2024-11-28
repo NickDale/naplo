@@ -1,4 +1,4 @@
-package hu.nje.naplo.controller.rest;
+package hu.nje.naplo.controller.web;
 
 import hu.nje.naplo.entity.Grade;
 import hu.nje.naplo.repository.GradeRepository;

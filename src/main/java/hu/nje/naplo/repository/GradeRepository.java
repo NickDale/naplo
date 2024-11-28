@@ -1,6 +1,7 @@
 package hu.nje.naplo.repository;
 
 import hu.nje.naplo.entity.Grade;
+import jakarta.validation.constraints.Positive;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
@@ -13,4 +14,7 @@ public interface GradeRepository extends JpaRepository<Grade, Integer> {
     List<Grade> findByCreationDateAfter(Instant date);
 
 
+    List<?> listGrades();
+
+    void deleteGradeById(@Positive int gradeId);
 }

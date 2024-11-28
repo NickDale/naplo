@@ -32,15 +32,9 @@ public class StudentRestController {
         return studentService.listStudents();
     }
 
-    @GetMapping(path = "/{studentId}")
+    @GetMapping(path = "/students/{studentId}")
     private Object findStudentById(@PathVariable @Positive final int studentId) {
         return studentService.findById(studentId);
-    }
-
-    @DeleteMapping(path = "/{studentId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteById(@PathVariable @Positive final int studentId) throws InvalidAlgorithmParameterException {
-        studentService.deleteStudentById(studentId);
     }
 
     @PostMapping()
@@ -49,10 +43,15 @@ public class StudentRestController {
         //studentService.deleteStudentById(studentId);
     }
 
-    @PatchMapping(path = "/{studentId}")
+    @PatchMapping(path = "/edit_student/{studentId}")
     private void updateStudent(@PathVariable @Positive final int studentId) {
         //studentService.deleteStudentById(studentId);
     }
 
+    @DeleteMapping(path = "/delete_student/{studentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void deleteById(@PathVariable @Positive final int studentId) throws InvalidAlgorithmParameterException {
+        studentService.deleteStudentById(studentId);
+    }
 
 }
