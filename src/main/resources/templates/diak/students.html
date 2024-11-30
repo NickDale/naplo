@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tárgyak listája</title>
+    <title>Diákok listája</title>
     <link rel="stylesheet" href="../../static/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +20,13 @@
                 <a th:href="@{/home.html}">Kilépés</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/students}">Diákok</a>
+                <a th:href="@{/diak/students}">Diákok</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+                <a th:href="@{/diak/subjects}">Tantárgyak</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/grades}">Jegyek</a>
+                <a th:href="@{/diak/grades}">Jegyek</a>
             </li>
         </ul>
     </nav>
@@ -37,25 +37,20 @@
 </header>
 <section class="page">
     <div class="form-group">
-    <h4>Tárgyak listája</h4>
-    <table id="subjectsTable" class="display">
+    <h4>Diákok listája</h4>
+    <table id="studentTable" class="display">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Név</th>
-            <th>Kategória</th>
-            <th>Műveletek</th>
+            <th>Osztály</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each="subject : ${subjects}">
-            <td th:text="${subject.id}">ID</td>
-            <td th:text="${subject.nev}">Név</td>
-            <td th:text="${subject.kategoria}">Kategória</td>
-            <td>
-                <a th:href="@{/admin/edit_subject/{id}(id=${subject.id})}" class="btn btn-outline-success">Módosítás</a>
-                <a th:href="@{/admin/delete_subject/{id}(id=${subject.id})}" class="btn btn-outline-danger">Törlés</a>
-            </td>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.nev}">Név</td>
+            <td th:text="${student.osztaly}">Osztály</td>
+
         </tr>
         </tbody>
     </table>
@@ -65,22 +60,9 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#subjectsTable').DataTable({
-            "language": {
-                "search": "Keresés:",
-                "lengthMenu": "Mutass _MENU_ bejegyzést",
-                "info": "Megjelenítve _START_ - _END_ / _TOTAL_ bejegyzés",
-                "paginate": {
-                    "first": "Első",
-                    "last": "Utolsó",
-                    "next": "Következő",
-                    "previous": "Előző"
-                }
-            }
-        });
+        $('#studentTable').DataTable();
     });
 </script>
-
 </section>
 </body>
 <footer>

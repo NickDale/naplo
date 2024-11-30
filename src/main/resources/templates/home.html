@@ -11,8 +11,8 @@
     <div class="logo">Iskolai Napló</div>
     <nav id="navbar">
         <ul>
-            <li><a href="register.html">Regisztráció</a></li>
-            <li><a href="login.html">Bejelentkezés</a></li>
+            <li><a th:href="@{/register}">Regisztráció</a></li>
+            <li><a th:href="@{/login}">Bejelentkezés</a></li>
         </ul>
     </nav>
 
@@ -52,10 +52,10 @@
 </footer>
 
 <script th:inline="javascript">
-
     /*<![CDATA[*/
-    const isLoggedIn = [[$,{#httpServletRequest:remoteUser != null}]];
+    const isLoggedIn = /*[[${#httpServletRequest.remoteUser != null}]]*/ false;
     /*]]>*/
 </script>
+
 </body>
 </html>
