@@ -1,8 +1,8 @@
 package hu.nje.naplo.service;
 
+import hu.nje.naplo.controller.exceptions.ResourceNotFoundException;
 import hu.nje.naplo.entity.Student;
 import hu.nje.naplo.repository.StudentRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -25,13 +25,11 @@ public class StudentService {
 
     public Student findById(final int studentId) {
         return studentRepository.findById(studentId)
-                .orElseThrow(() -> new IllegalArgumentException("Diák nem található az adott ID-val: " + studentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Diák nem található az adott ID-val: {} ", studentId));
     }
 
     public void deleteStudentById(final int studentId) {
-        if (!studentRepository.existsById(studentId)) {
-            throw new RuntimeException("Diák nem található az adott ID-val: " + studentId);
-        }
+        this.checkStudentExistsById(studentId);
         studentRepository.deleteById(studentId);
     }
 
@@ -40,12 +38,16 @@ public class StudentService {
     }
 
     public Student modifyStudent(int studentId, final Student student) {
-        boolean existsById = studentRepository.existsById(studentId);
-        if (!existsById) {
-            throw new RuntimeException("Diák nem található az adott ID-val: " + studentId);
-        }
+        this.checkStudentExistsById(studentId);
         student.setId(studentId);
         return studentRepository.save(student);
+    }
+
+    private void checkStudentExistsById(final int studentId) {
+        boolean existsById = studentRepository.existsById(studentId);
+        if (!existsById) {
+            throw new ResourceNotFoundException("Diák nem található az adott ID-val: {} ", studentId);
+        }
     }
 
     public Student modifyStudent(final int studentId, final Map<String, Object> updates) {

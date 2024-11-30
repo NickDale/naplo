@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-@Validated
 @RestController
 @RequestMapping(value = "/api/students")
 public class StudentRestController {
@@ -29,7 +28,6 @@ public class StudentRestController {
     public StudentRestController(StudentService studentService) {
         this.studentService = studentService;
     }
-
 
     @GetMapping
     private List<Student> listStudents() {
