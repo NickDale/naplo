@@ -28,13 +28,14 @@ public class LoginController {
 
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent() && user.get().getPassword().equals(password)) {
-            if(Objects.equals(User.getRole(), "diák")){
-                return "redirect:/diak/grades";
-            }
-            else if(Objects.equals(User.getRole(), "tanár")){
-                return "redirect:/tanar/grades";
-            }
-            else return "redirect:/admin/grades";
+//            if(Objects.equals(User.getRole(), "diák")){
+//                return "redirect:/diak/grades";
+//            }
+//            else if(Objects.equals(User.getRole(), "tanár")){
+//                return "redirect:/tanar/grades";
+//            }
+//            else
+            return "redirect:/admin/grades";
 
         } else {
             model.addAttribute("loginError", "Helytelen felhasználónév vagy jelszó.");
