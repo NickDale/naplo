@@ -8,13 +8,13 @@ import java.time.Instant;
 import java.util.List;
 
 public interface GradeRepository extends JpaRepository<Grade, Integer> {
-
-    List<Grade> findByStudent_StudentName(String studentName);
-    List<Grade> findBySubject_Name(String subjectName);
-    List<Grade> findByCreationDateAfter(Instant date);
-
-
-    List<?> listGrades();
-
-    void deleteGradeById(@Positive int gradeId);
+//
+//    List<Grade> findByStudent_StudentName(String studentName);
+//    List<Grade> findBySubject_Name(String subjectName);
+//    List<Grade> findByCreationDateAfter(Instant date);
+//
+//
+//    List<?> listGrades();
+//
+//    void deleteGradeById(@Positive int gradeId);
 }

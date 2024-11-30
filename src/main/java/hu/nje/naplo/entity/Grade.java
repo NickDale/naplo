@@ -21,27 +21,34 @@ import java.util.Objects;
 @Table(name = "jegy")
 public class Grade extends AbstractEntity {
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "diakid", nullable = false)
-    private Student student;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "targyid", nullable = false)
-    private Subject subject;
+    @Column(name = "diakid")
+    private int studentId;
 
     @NotNull
     @ColumnDefault("current_timestamp()")
     @Column(name = "datum", nullable = false)
     private Instant creationDate;
 
-    @Column(name = "ertek")
-    private int value;
-
     @Size(max = 100)
     @Column(name = "tipus", length = 100)
     private String type;
+
+    @Column(name = "ertek")
+    private int value;
+
+    @Column(name = "targyid")
+    private int subjectId;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "diakid",updatable = false, insertable = false)
+    private Student student;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "targyid", updatable = false, insertable = false)
+    private Subject subject;
+
 
     @Override
     public boolean equals(Object o) {

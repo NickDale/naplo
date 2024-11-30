@@ -27,13 +27,13 @@ public class SubjectController {
     }
     @GetMapping("/add")
     public String showAddSubjectForm(Model model) {
-        model.addAttribute("categories", subjectService.getCategories());
+//        model.addAttribute("categories", subjectService.getCategories());
         return "admin/add_subject";
     }
 
     @PostMapping("/add")
     public String addSubject(@RequestParam String subject_name, @RequestParam String category) {
-        subjectService.addSubject(subject_name, category);
+//        subjectService.addSubject(subject_name, category);
         return "redirect:/admin/list";
     }
 }

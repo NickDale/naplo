@@ -1,19 +1,27 @@
 package hu.nje.naplo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "diak")
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student extends AbstractEntity {
 
     @Size(max = 100)
@@ -26,9 +34,17 @@ public class Student extends AbstractEntity {
     @Column(name = "osztaly", nullable = false, length = 100)
     private String className;
 
-    @NotNull
+    @JsonIgnore
     @Column(name = "fiu", nullable = false)
-    private Boolean men = false;
+    private int men;
+
+    public boolean isMen() {
+        return this.men != 0;
+    }
+
+    public void setMen(final boolean isMen) {
+        this.men = isMen ? -1 : 0;
+    }
 
     @Override
     public boolean equals(Object o) {
