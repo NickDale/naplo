@@ -20,13 +20,13 @@
                 <a th:href="@{/home.html}">Kilépés</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/students}">Diákok</a>
+                <a th:href="@{/tanar/students}">Diákok</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+                <a th:href="@{/tanar/subjects}">Tantárgyak</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/grades}">Jegyek</a>
+                <a th:href="@{/tanar/grades}">Jegyek</a>
             </li>
         </ul>
     </nav>
@@ -37,35 +37,32 @@
 </header>
 <section class="page">
     <div class="form-group">
-    <h4>Diákok listája</h4>
-    <table id="studentTable" class="display">
-        <thead>
-        <tr>
-            <th>Név</th>
-            <th>Osztály</th>
-            <th>Műveletek</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.nev}">Név</td>
-            <td th:text="${student.osztaly}">Osztály</td>
-            <td>
-                <a th:href="@{/admin/edit_student/{id}(id=${student.id})}" class="btn btn-outline-success">Módosítás</a>
-                <a th:href="@{/admin/delete_student/{id}(id=${student.id})}" class="btn btn-outline-danger">Törlés</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <h4>Diákok listája</h4>
+        <table id="studentTable" class="display">
+            <thead>
+            <tr>
+                <th>Név</th>
+                <th>Osztály</th>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#studentTable').DataTable();
-    });
-</script>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.nev}">Név</td>
+                <td th:text="${student.osztaly}">Osztály</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#studentTable').DataTable();
+        });
+    </script>
 </section>
 </body>
 <footer>

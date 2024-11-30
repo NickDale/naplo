@@ -20,13 +20,13 @@
                 <a th:href="@{/home.html}">Kilépés</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/students}">Diákok</a>
+                <a th:href="@{/diak/students}">Diákok</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+                <a th:href="@{/diak/subjects}">Tantárgyak</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/grades}">Jegyek</a>
+                <a th:href="@{/diak/grades}">Jegyek</a>
             </li>
         </ul>
     </nav>
@@ -44,7 +44,7 @@
             <th>ID</th>
             <th>Név</th>
             <th>Kategória</th>
-            <th>Műveletek</th>
+
         </tr>
         </thead>
         <tbody>
@@ -52,10 +52,7 @@
             <td th:text="${subject.id}">ID</td>
             <td th:text="${subject.nev}">Név</td>
             <td th:text="${subject.kategoria}">Kategória</td>
-            <td>
-                <a th:href="@{/admin/edit_subject/{id}(id=${subject.id})}" class="btn btn-outline-success">Módosítás</a>
-                <a th:href="@{/admin/delete_subject/{id}(id=${subject.id})}" class="btn btn-outline-danger">Törlés</a>
-            </td>
+
         </tr>
         </tbody>
     </table>

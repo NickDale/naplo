@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diákok listája</title>
+    <title>Jegy törlése</title>
+    <link rel="stylesheet" href="../../static/style.css">
     <link rel="stylesheet" href="../../static/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +20,13 @@
                 <a th:href="@{/home.html}">Kilépés</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/students}">Diákok</a>
+                <a th:href="@{/tanar/students}">Diákok</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+                <a th:href="@{/tanar/subjects}">Tantárgyak</a>
             </li>
             <li th:if="${#httpServletRequest.remoteUser != null}">
-                <a th:href="@{/admin/grades}">Jegyek</a>
+                <a th:href="@{/tanar/grades}">Jegyek</a>
             </li>
         </ul>
     </nav>
@@ -37,35 +37,20 @@
 </header>
 <section class="page">
     <div class="form-group">
-    <h4>Diákok listája</h4>
-    <table id="studentTable" class="display">
-        <thead>
-        <tr>
-            <th>Név</th>
-            <th>Osztály</th>
-            <th>Műveletek</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.nev}">Név</td>
-            <td th:text="${student.osztaly}">Osztály</td>
-            <td>
-                <a th:href="@{/admin/edit_student/{id}(id=${student.id})}" class="btn btn-outline-success">Módosítás</a>
-                <a th:href="@{/admin/delete_student/{id}(id=${student.id})}" class="btn btn-outline-danger">Törlés</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <h4>Jegy Törlése</h4>
+        <p>Biztosan törölni szeretné a következő jegyet?</p>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#studentTable').DataTable();
-    });
-</script>
+        <!-- Törölni kívánt jegy adatai -->
+        <p><strong>Diák neve:</strong> <span th:text="${jegy.diak.nev}"></span></p>
+        <p><strong>Tárgy neve:</strong> <span th:text="${jegy.targy.nev}"></span></p>
+        <p><strong>Jegy értéke:</strong> <span th:text="${jegy.ertek}"></span></p>
+        <p><strong>Dátum:</strong> <span th:text="${jegy.datum}"></span></p>
+
+        <form th:action="@{/jegyek/delete/{id}(id=${jegy.id})}" method="post">
+            <button type="submit" class="btn btn-danger">Igen, törlés</button>
+            <a href="/grades"><button class="btn btn-outline-dark">Mégse</button></a>
+        </form>
+    </div>
 </section>
 </body>
 <footer>

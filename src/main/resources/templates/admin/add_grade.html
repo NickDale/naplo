@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diákok listája</title>
+    <meta charset ="utf-8">
+    <title>Jegy Hozzáadása</title>
     <link rel="stylesheet" href="../../static/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,38 +35,21 @@
     </div>
 </header>
 <section class="page">
-    <div class="form-group">
-    <h4>Diákok listája</h4>
-    <table id="studentTable" class="display">
-        <thead>
-        <tr>
-            <th>Név</th>
-            <th>Osztály</th>
-            <th>Műveletek</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.nev}">Név</td>
-            <td th:text="${student.osztaly}">Osztály</td>
-            <td>
-                <a th:href="@{/admin/edit_student/{id}(id=${student.id})}" class="btn btn-outline-success">Módosítás</a>
-                <a th:href="@{/admin/delete_student/{id}(id=${student.id})}" class="btn btn-outline-danger">Törlés</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#studentTable').DataTable();
-    });
-</script>
+    <div class="register-container">
+        <div class="register-box">
+<h4>Új Jegy Hozzáadása</h4>
+<form th:action="@{/grades}" method="post">
+    <label>Diák:</label>
+    <input type="text" name="studentId" /><br />
+    <label>Tantárgy:</label>
+    <input type="text" name="subjectId" /><br />
+    <label>Jegy:</label>
+    <input type="number" name="value" /><br />
+    <button type="submit">Hozzáadás</button>
+</form>
+        </div>
+    </div>
 </section>
-</body>
 <footer>
     <p>&copy; 2024 Gimnáziumi Naplókezelő Rendszer. Minden jog fenntartva.</p>
 </footer>
@@ -75,4 +57,5 @@
 <script th:inline="javascript">
     const isLoggedIn = /*[[${#httpServletRequest.remoteUser != null}]]*/ false;
 </script>
+</body>
 </html>
