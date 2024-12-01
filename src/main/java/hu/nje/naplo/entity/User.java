@@ -8,15 +8,20 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "felhasznalo")
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements UserDetails {
 
     @Size(max = 200)
     @NotNull
@@ -47,17 +52,38 @@ public class User extends AbstractEntity {
     private Instant inactivationDate;
 
     @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.getRole()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.active != null && this.active;
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name)
-                && Objects.equals(username, user.username) && Objects.equals(password, user.password)
-                && Objects.equals(role, user.role) && Objects.equals(active, user.active)
-                && Objects.equals(inactivationDate, user.inactivationDate);
+        return Objects.equals(username, user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, username, password, role, active, inactivationDate);
+        return Objects.hash(username);
     }
 }
