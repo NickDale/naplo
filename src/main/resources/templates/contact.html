@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapcsolatfelvétel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header :: header}"></header>
+
+<section class="page">
+    <div class="register-container">
+        <div class="register-box">
+            <h2>Kapcsolatfelvétel</h2>
+            <form th:action="@{/contact}" method="post">
+                <div class="form-group">
+                    <label for="name">Név:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Üzenet:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Üzenet Küldése</button>
+                </div>
+                 <div th:if="${message}" class="error">
+                    <p th:text="${message}"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

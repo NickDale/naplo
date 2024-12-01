@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+</head>
+<body>
+<header>
+    <div class="logo">Iskolai Napló</div>
+    <nav id="navbar">
+        <ul>
+            <li><a th:href="@{/home}">Főoldal</a></li>
+            <li th:if="${#httpServletRequest.remoteUser != null}">
+                <a th:href="@{/home.html}">Kilépés</a>
+            </li>
+            <li th:if="${#httpServletRequest.remoteUser != null}">
+                <a th:href="@{/admin/students}">Diákok</a>
+            </li>
+            <li th:if="${#httpServletRequest.remoteUser != null}">
+                <a th:href="@{/admin/subjects}">Tantárgyak</a>
+            </li>
+            <li th:if="${#httpServletRequest.remoteUser != null}">
+                <a th:href="@{/admin/grades}">Jegyek</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="user-info" id="userInfo" style="display:none;">
+        Üdvözöljük, <span id="userName">Felhasználó</span>!
+    </div>
+</header>
+<section class="page">
+<div class="form-group">
+    <h4>Tárgy Hozzáadása</h4>
+    <form method="POST" action="">
+        <label for="subject_name">Tárgy neve:</label>
+        <input type="text" id="subject_name" name="subject_name" required>
+
+        <label for="category">Kategória:</label>
+        <select name="category" id="category" required>
+            <option value="">Válassz egy kategóriát</option>
+            <option value="true">Irodalom</option>
+            <option value="true">Matematika</option>
+            <option value="true">Történelem</option>
+            <option value="true">Fizika</option>
+            <option value="true">Testnevelés</option>
+            <option value="true">Kémia</option>
+            <option value="true">Földrajz</option>
+        </select>
+
+        <button type="submit">Hozzáadás</button>
+    </form>
+</div>
+</section>
+</body>
+<footer>
+    <p>&copy; 2024 Gimnáziumi Naplókezelő Rendszer. Minden jog fenntartva.</p>
+</footer>
+
+<script th:inline="javascript">
+    const isLoggedIn = /*[[${#httpServletRequest.remoteUser != null}]]*/ false;
+</script>
+</html>
