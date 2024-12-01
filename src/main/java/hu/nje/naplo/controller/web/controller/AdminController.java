@@ -8,11 +8,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@PreAuthorize("hasRole('ADMIN')")
 @Controller
 @RequestMapping(path = "/admins")
 @RequiredArgsConstructor
@@ -20,7 +21,11 @@ public class AdminController {
 
     private final ContactMessageRepository contactMessageRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "admin/dashboard";
+    }
+
     @GetMapping("/messages")
     public String viewMessages(Model model) {
         List<ContactMessage> messages = contactMessageRepository.findAll(Sort.by(Sort.Direction.DESC, "sentAt"));
@@ -28,23 +33,10 @@ public class AdminController {
         return "admin/messages";
     }
 
-    @GetMapping(path = "/students")
-    public String students(Model model) {
-        return "admin/students";
+    @GetMapping("/delete-message/{messageId}")
+    public String viewMessages(@PathVariable int messageId, Model model) {
+        contactMessageRepository.deleteById(messageId);
+        return "redirect:/admins/messages";
     }
 
-    @PostMapping(path = "/students")
-    public String sudentCreation(Model model) {
-        return "redirect:admin/students";
-    }
-
-    @GetMapping(path = "/grades")
-    public String grades(Model model) {
-        return "admin/grades";
-    }
-
-    @PostMapping(path = "/grades")
-    public String gradesCreation(Model model) {
-        return "redirect:admin/grades";
-    }
 }

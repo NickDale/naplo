@@ -37,7 +37,7 @@ public class UserController {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
 
-        user.setRole(Role.valueOf(userDto.getRole()));
+        user.setRole(Role.valueOf("ROLE_"+userDto.getRole()));
         user.setActive(true);
 
         userRepository.save(user);

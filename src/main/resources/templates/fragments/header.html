@@ -1,37 +1,47 @@
 <div th:fragment="header">
     <div class="logo">Iskolai Napló</div>
-    <nav id="navbar">
-        <ul>
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/users/register}">Regisztráció</a>
-            </li>
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/login}">Bejelentkezés</a>
-            </li>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/home}">
+                <img src="../images/school-bag.png" width="30" height="24"
+                     class="d-inline-block align-text-top header-logo" alt="logo"></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/users/register}">Regisztráció</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}">Bejelentkezés</a>
+                    </li>
 
-            <li sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">
-                <a th:href="@{/students}">Diákok</a>
-            </li>
-            <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/subjects}">Tantárgyak</a>
-            </li>
-            <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/grades}">Jegyek</a>
-            </li>
-            <li sec:authorize="isAnonymous() or (isAuthenticated() and !hasRole('ROLE_ADMIN'))">
-                <a th:href="@{/contact}">Írj üzenetet!</a>
-            </li>
-            <li sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">
-                <a th:href="@{/admins/messages}">Üzenetek</a>
-            </li>
+                    <li sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/students}">Diákok</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/subjects}">Tantárgyak</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/grades}">Jegyek</a>
+                    </li>
+                    <li sec:authorize="isAnonymous() or (isAuthenticated() and !hasRole('ROLE_ADMIN'))">
+                        <a th:href="@{/contact}">Írj üzenetet!</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/admins/messages}">Üzenetek</a>
+                    </li>
+                      <li sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/admins/dashboard}">Admin Dashboard</a>
+                    </li>
 
-            <li sec:authorize="isAuthenticated()">
-                Bejelentkezve mint:
-                <strong>
-                    <span sec:authentication="name"></span>
-                </strong>
-                <a th:href="@{/logout}">(Kilépés)</a>
-            </li>
-        </ul>
+                    <li sec:authorize="isAuthenticated()">
+                        Bejelentkezve mint:
+                        <strong>
+                            <span sec:authentication="name"></span>
+                        </strong>
+                        <a th:href="@{/logout}">(Kilépés)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </div>

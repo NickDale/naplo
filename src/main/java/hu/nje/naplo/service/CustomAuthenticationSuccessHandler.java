@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                                         Authentication authentication) throws IOException, ServletException {
         var authorities = authentication.getAuthorities();
         if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals(ROLE_ADMIN.name()))) {
-            response.sendRedirect("/admin/dashboard");
+            response.sendRedirect("/admins/dashboard");
             return;
         }
 
