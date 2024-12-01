@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regisztráció</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
@@ -22,18 +22,18 @@
         <div class="register-container">
             <div class="register-box">
                 <h2>Felhasználó Regisztráció</h2>
-                <form action="#" th:action="@{/register}" method="post">
+                <form action="#" th:action="@{/users/register}" th:object="${user}" method="post">
                     <div class="form-group">
                         <label for="nev">Teljes Név:</label>
-                        <input type="text" id="nev" name="nev" required placeholder="Adja meg a teljes nevét">
+                        <input type="text" id="nev" th:field="*{name}" name="nev" required placeholder="Adja meg a teljes nevét">
                     </div>
                     <div class="form-group">
                         <label for="felhasznalo_nev">Felhasználónév:</label>
-                        <input type="text" id="felhasznalo_nev" name="felhasznalo_nev" required placeholder="Felhasználónév">
+                        <input type="text" id="felhasznalo_nev"  th:field="*{username}" name="felhasznalo_nev" required placeholder="Felhasználónév">
                     </div>
                     <div class="form-group">
                         <label for="jelszo">Jelszó:</label>
-                        <input type="password" id="jelszo" name="jelszo" required placeholder="Jelszó">
+                        <input type="password" id="jelszo" th:field="*{password}" name="jelszo" required placeholder="Jelszó">
                     </div>
                     <div class="form-group">
                         <label for="szerepkor">Szerepkör:</label>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="login-redirect">
-                    <p>Már van fiókja? <a href="login.html">Jelentkezzen be itt!</a></p>
+                    <p>Már van fiókja? <a th:href="@{/login}">Jelentkezzen be itt!</a></p>
                 </div>
             </div>
         </div>

@@ -32,13 +32,16 @@ public class User extends AbstractEntity {
     @NotNull
     @Column(name = "jelszo", nullable = false, length = 40)
     private String password;
+
     @Size(max = 10)
     @NotNull
     @Column(name = "jogosultsag", nullable = false, length = 10)
     private String role;
+
     @ColumnDefault("1")
     @Column(name = "aktiv")
     private Boolean active;
+
     @ColumnDefault("current_timestamp()")
     @Column(name = "inaktivalas_datum")
     private Instant inactivationDate;
