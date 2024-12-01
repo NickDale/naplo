@@ -1,0 +1,19 @@
+<div th:fragment="header">
+    <div class="logo">Iskolai Napló</div>
+    <nav id="navbar">
+        <ul>
+            <li sec:authorize="isAuthenticated()">
+                Bejelentkezve mint: <span sec:authentication="name"></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Kilépés</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/users/register}">Regisztráció</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/login}">Bejelentkezés</a>
+            </li>
+        </ul>
+    </nav>
+</div>

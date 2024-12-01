@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<header>
-    <div class="logo">Iskolai Napló</div>
-    <nav id="navbar">
-        <ul>
-            <li sec:authorize="isAuthenticated()">
-                Bejelentkezve mint: <span sec:authentication="name"></span>
-            </li>
-            <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/logout}">Kilépés</a>
-            </li>
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/users/register}">Regisztráció</a>
-            </li>
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/login}">Bejelentkezés</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="user-info" id="userInfo" style="display:none;">
-        Üdvözöljük,
-        <!--        <span id="userName" th:text="${User.name}">Felhasználó</span>!-->
-    </div>
-</header>
+<header th:insert="~{fragments/header :: header}"></header>
 
 <section class="hero">
     <div class="hero-content">
