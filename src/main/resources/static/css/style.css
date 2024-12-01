@@ -1,4 +1,3 @@
-src/main/resources/templates/
 
 nav ul li a {
     pointer-events: auto; /* Győződj meg róla, hogy kattintható */
@@ -67,12 +66,13 @@ nav ul li a {
 
 .hero {
     background: url('../images/background.png') no-repeat center center/cover;
-    height: 400px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: rgb(3, 3, 3);
     text-align: center;
+    padding-bottom: 50px;
 }
 
 .hero-content h1 {
@@ -99,8 +99,9 @@ nav ul li a {
 }
 
 .features {
-    padding: 50px 20px;
+    padding: 20px 20px;
     text-align: center;
+    background-color: #636a61;
 }
 
 .feature-grid {
@@ -499,4 +500,89 @@ form button:hover {
     height: auto;        /* Az arányos magasság megtartása */
     display: block;      /* A kép block szintű elemként jelenjen meg */
     margin: 0 auto;      /* Kép középre igazítása */
+    border-radius:5%
+}
+nav {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.header-logo {
+    width: 100px; /* A kívánt szélesség */
+    height: auto; /* Magasság arányosan állítódik */
+    max-height: 50px; /* Max magasság, hogy ne legyen túl nagy */
+    object-fit: contain; /* Megtartja az arányokat */
+    margin-right: 10px; /* Ha van hely az ikon és a szöveg között */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+}
+
+.message-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.message-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.message-card p {
+    margin: 5px 0;
+    line-height: 1.6;
+}
+
+.message-card .meta {
+    font-size: 14px;
+    color: #777;
+}
+
+.message-card .actions {
+    margin-top: 10px;
+}
+
+.message-card .actions button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.message-card .actions .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.message-card .actions .reply-btn {
+    background-color: #3498db;
+    color: white;
 }
