@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Date;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "hu.nje.naplo.controller.rest")
 public class GlobalRestExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
