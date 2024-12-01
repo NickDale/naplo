@@ -64,22 +64,23 @@ package hu.nje.naplo.controller.web.controller;
 //        }
 //    }
 //
-////    @PostMapping("/delete/{id}")
-////    public String deleteStudent(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-////        boolean success = studentRepository.deleteById(id);
-////        if (success) {
-////            redirectAttributes.addFlashAttribute("message", "Diák sikeresen törölve.");
-////            return "redirect:/students/list";
-////        } else {
-////            redirectAttributes.addFlashAttribute("error", "Hiba történt a törlés során.");
-////            return "redirect:/students/list";
-////        }
-////    }
+/// /    @PostMapping("/delete/{id}")
+/// /    public String deleteStudent(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+/// /        boolean success = studentRepository.deleteById(id);
+/// /        if (success) {
+/// /            redirectAttributes.addFlashAttribute("message", "Diák sikeresen törölve.");
+/// /            return "redirect:/students/list";
+/// /        } else {
+/// /            redirectAttributes.addFlashAttribute("error", "Hiba történt a törlés során.");
+/// /            return "redirect:/students/list";
+/// /        }
+/// /    }
 //
 
 import hu.nje.naplo.entity.Student;
 import hu.nje.naplo.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -102,6 +103,7 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
     @GetMapping
     public String getSubjects(Model model) {
         final List<Student> students = studentService.listStudents();

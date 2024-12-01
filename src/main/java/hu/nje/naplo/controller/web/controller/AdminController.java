@@ -4,6 +4,7 @@ import hu.nje.naplo.entity.ContactMessage;
 import hu.nje.naplo.repository.ContactMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class AdminController {
 
     private final ContactMessageRepository contactMessageRepository;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/messages")
     public String viewMessages(Model model) {
         List<ContactMessage> messages = contactMessageRepository.findAll(Sort.by(Sort.Direction.DESC, "sentAt"));
