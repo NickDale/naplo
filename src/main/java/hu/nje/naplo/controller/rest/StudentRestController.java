@@ -41,7 +41,7 @@ public class StudentRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private Student createStudent(@Valid @RequestBody final Student student) {
+    private Student createStudent( @RequestBody final Student student) {
         return studentService.createStudent(student);
     }
 

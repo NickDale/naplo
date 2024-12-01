@@ -32,21 +32,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
 //                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(STATELESS))
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .cors(AbstractHttpConfigurer::disable)
-                .formLogin(
-//                        Customizer.withDefaults())
-                        form -> form
-                                .loginPage("/login")
-                                .successHandler(successHandler)
-                                .permitAll()
-                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         requests -> requests.requestMatchers(
                                 "/","/home","/users/register","/login","/css/**", "/js/**", "/images/**",
                                 "favicon.ico","/api/**"
                                 ).permitAll()
                         .anyRequest().authenticated()
+                )
+                .formLogin(
+//                        Customizer.withDefaults())
+                        form -> form
+                                .loginPage("/login")
+                                .successHandler(successHandler)
+                                .permitAll()
                 )
                 .logout(
                         logout -> logout.permitAll()
