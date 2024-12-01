@@ -6,6 +6,7 @@ import hu.nje.naplo.repository.ContactMessageRepository;
 import hu.nje.naplo.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,9 @@ public class ContactController {
     private final ContactMessageRepository contactMessageRepository;
     private final UserRepository userRepository;
 
+    @PreAuthorize("hasRole('TEACHER')")
     @GetMapping
     public String showContactForm(Model model) {
-        model.addAttribute("message", new ContactMessage());
         return "contact";
     }
 
