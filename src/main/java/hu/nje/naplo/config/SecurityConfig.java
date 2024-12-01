@@ -30,14 +30,12 @@ public class SecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-//                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
@@ -48,7 +46,6 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .formLogin(
-//                        Customizer.withDefaults())
                         form -> form
                                 .loginPage("/login")
                                 .successHandler(successHandler)
