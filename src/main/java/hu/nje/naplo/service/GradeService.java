@@ -16,4 +16,5 @@ public class GradeService {
     public List<Grade> findAllGrades() {
         return this.repository.findAll();
     }
+
 }

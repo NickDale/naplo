@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+import static hu.nje.naplo.entity.Role.ROLE_ADMIN;
+
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -16,15 +18,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        String redirectUrl = "/";
         var authorities = authentication.getAuthorities();
-
-        if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-            redirectUrl = "/admin/dashboard";
-        } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
-            redirectUrl = "/user/home";
+        if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals(ROLE_ADMIN.name()))) {
+            response.sendRedirect("/admin/dashboard");
+            return;
         }
 
-        response.sendRedirect(redirectUrl);
+        response.sendRedirect("/home");
     }
 }

@@ -6,7 +6,6 @@ import hu.nje.naplo.repository.ContactMessageRepository;
 import hu.nje.naplo.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ public class ContactController {
     private final ContactMessageRepository contactMessageRepository;
     private final UserRepository userRepository;
 
-    @PreAuthorize("hasRole('TEACHER')")
     @GetMapping
     public String showContactForm(Model model) {
         return "contact";
@@ -52,11 +50,4 @@ public class ContactController {
         return "contact";
     }
 
-    //TODO: nem ide
-//    @GetMapping("/messages")
-//    public String viewMessages(Model model) {
-//        List<ContactMessage> messages = contactMessageRepository.findAll(Sort.by(Sort.Direction.DESC, "sentAt"));
-//        model.addAttribute("messages", messages);
-//        return "messages";
-//    }
 }

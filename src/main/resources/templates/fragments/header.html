@@ -9,7 +9,6 @@
                 <a th:href="@{/login}">Bejelentkezés</a>
             </li>
 
-
             <li sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_ADMIN')">
                 <a th:href="@{/students}">Diákok</a>
             </li>
@@ -19,12 +18,18 @@
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/grades}">Jegyek</a>
             </li>
-            <li sec:authorize="isAnonymous() or (isAuthenticated() and hasRole('ROLE_STUDENT'))">
+            <li sec:authorize="isAnonymous() or (isAuthenticated() and !hasRole('ROLE_ADMIN'))">
                 <a th:href="@{/contact}">Írj üzenetet!</a>
             </li>
+            <li sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">
+                <a th:href="@{/admins/messages}">Üzenetek</a>
+            </li>
+
             <li sec:authorize="isAuthenticated()">
                 Bejelentkezve mint:
-                <span sec:authentication="name"></span>
+                <strong>
+                    <span sec:authentication="name"></span>
+                </strong>
                 <a th:href="@{/logout}">(Kilépés)</a>
             </li>
         </ul>
