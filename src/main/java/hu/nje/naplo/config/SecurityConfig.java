@@ -1,6 +1,6 @@
 package hu.nje.naplo.config;
 
-import hu.nje.naplo.controller.web.CustomAuthenticationSuccessHandler;
+import hu.nje.naplo.service.CustomAuthenticationSuccessHandler;
 import hu.nje.naplo.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -70,21 +70,5 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-//
-//    @Bean
-//    @SuppressWarnings({"deprecation"})
-//    public NoOpPasswordEncoder passwordEncoder() {
-//        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//    }
+
 }

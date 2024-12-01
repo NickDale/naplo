@@ -2,6 +2,8 @@ package hu.nje.naplo.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -41,7 +43,8 @@ public class User extends AbstractEntity implements UserDetails {
     @Size(max = 10)
     @NotNull
     @Column(name = "jogosultsag", nullable = false, length = 10)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ColumnDefault("1")
     @Column(name = "aktiv")
@@ -53,7 +56,7 @@ public class User extends AbstractEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.getRole()));
+        return List.of(new SimpleGrantedAuthority(this.getRole().name()));
     }
 
     @Override

@@ -37,10 +37,10 @@
                     </div>
                     <div class="form-group">
                         <label for="szerepkor">Szerepkör:</label>
-                        <select id="szerepkor" name="szerepkor" required>
-                            <option value="diak">Diák</option>
-                            <option value="tanar">Tanár</option>
-                            <option value="admin">Admin</option>
+                        <select id="szerepkor" name="szerepkor" required th:field="*{role}">
+                            <option value="STUDENT">Diák</option>
+                            <option value="TEACHER">Tanár</option>
+                            <option value="ADMIN">Admin</option>
                         </select>
                     </div>
                     <div class="form-group">

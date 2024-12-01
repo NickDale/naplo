@@ -1,6 +1,7 @@
-package hu.nje.naplo.controller.web;
+package hu.nje.naplo.controller.web.controller;
 
 import hu.nje.naplo.controller.web.model.UserDto;
+import hu.nje.naplo.entity.Role;
 import hu.nje.naplo.entity.User;
 import hu.nje.naplo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class UserController {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
 
-        user.setRole("USER");
+        user.setRole(Role.valueOf(userDto.getRole()));
         user.setActive(true);
 
         userRepository.save(user);

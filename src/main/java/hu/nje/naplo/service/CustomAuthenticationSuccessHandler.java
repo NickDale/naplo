@@ -1,4 +1,4 @@
-package hu.nje.naplo.controller.web;
+package hu.nje.naplo.service;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,8 +16,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-
-         String redirectUrl = "/";
+        String redirectUrl = "/";
         var authorities = authentication.getAuthorities();
 
         if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
@@ -26,7 +25,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             redirectUrl = "/user/home";
         }
 
-        // Átirányítás
         response.sendRedirect(redirectUrl);
     }
 }
