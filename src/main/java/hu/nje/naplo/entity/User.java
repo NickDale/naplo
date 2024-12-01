@@ -40,9 +40,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "jelszo", nullable = false, length = 40)
     private String password;
 
-    @Size(max = 10)
+    @Size(max = 100)
     @NotNull
-    @Column(name = "jogosultsag", nullable = false, length = 10)
+    @Column(name = "jogosultsag", nullable = false, length = 100)
     @Enumerated(EnumType.STRING)
     private Role role;
 

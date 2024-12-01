@@ -8,9 +8,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
 
 @Getter
 @Setter
@@ -22,11 +25,22 @@ public class ContactMessage extends AbstractEntity {
     private String email;
     private String message;
     private Integer userId;
-    private LocalDateTime sentAt = LocalDateTime.now();
+    @ColumnDefault("current_timestamp()")
+    private Instant sentAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", updatable = false, insertable = false)
     private User user;
+
+    public String getSender() {
+        return ofNullable(user).map(u ->
+                u.getName() + switch (u.getRole()) {
+                    case ROLE_STUDENT -> " (tanuló)";
+                    case ROLE_TEACHER -> " (tanár)";
+                    default -> "";
+                }
+        ).orElse("Vendég");
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -28,7 +28,6 @@ public class ContactController {
 
     @GetMapping
     public String showContactForm(Model model) {
-        model.addAttribute("message", new ContactMessage());
         return "contact";
     }
 
@@ -51,11 +50,4 @@ public class ContactController {
         return "contact";
     }
 
-    //TODO: nem ide
-//    @GetMapping("/messages")
-//    public String viewMessages(Model model) {
-//        List<ContactMessage> messages = contactMessageRepository.findAll(Sort.by(Sort.Direction.DESC, "sentAt"));
-//        model.addAttribute("messages", messages);
-//        return "messages";
-//    }
 }

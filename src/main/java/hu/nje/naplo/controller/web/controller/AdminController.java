@@ -1,23 +1,31 @@
 package hu.nje.naplo.controller.web.controller;
 
+import hu.nje.naplo.entity.ContactMessage;
+import hu.nje.naplo.repository.ContactMessageRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/admins")
+@RequiredArgsConstructor
 public class AdminController {
 
-    @GetMapping(path = "/subjects")
-    public String subjects(Model model) {
-        return "admin/subjects";
-    }
+    private final ContactMessageRepository contactMessageRepository;
 
-    @PostMapping(path = "/subjects")
-    public String subjectCreation(Model model) {
-        return "redirect:admin/subjects";
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/messages")
+    public String viewMessages(Model model) {
+        List<ContactMessage> messages = contactMessageRepository.findAll(Sort.by(Sort.Direction.DESC, "sentAt"));
+        model.addAttribute("messages", messages);
+        return "admin/messages";
     }
 
     @GetMapping(path = "/students")

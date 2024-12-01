@@ -1,5 +1,4 @@
-//package hu.nje.naplo.controller.web;
-//
+package hu.nje.naplo.controller.web.controller;
 //import hu.nje.naplo.entity.Student;
 //import hu.nje.naplo.repository.StudentRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@
 //        return studentRepository.findById(id).map(student -> {
 //            student.setStudentName(studentDetails.getStudentName());
 //            student.setClassName(studentDetails.getClassName());
-////            student.setMen(studentDetails.getMen());
+/// /            student.setMen(studentDetails.getMen());
 //            return ResponseEntity.ok(studentRepository.save(student));
 //        }).orElseGet(() -> ResponseEntity.notFound().build());
 //    }
@@ -65,18 +64,30 @@
 //        }
 //    }
 //
-////    @PostMapping("/delete/{id}")
-////    public String deleteStudent(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-////        boolean success = studentRepository.deleteById(id);
-////        if (success) {
-////            redirectAttributes.addFlashAttribute("message", "Diák sikeresen törölve.");
-////            return "redirect:/students/list";
-////        } else {
-////            redirectAttributes.addFlashAttribute("error", "Hiba történt a törlés során.");
-////            return "redirect:/students/list";
-////        }
-////    }
+/// /    @PostMapping("/delete/{id}")
+/// /    public String deleteStudent(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+/// /        boolean success = studentRepository.deleteById(id);
+/// /        if (success) {
+/// /            redirectAttributes.addFlashAttribute("message", "Diák sikeresen törölve.");
+/// /            return "redirect:/students/list";
+/// /        } else {
+/// /            redirectAttributes.addFlashAttribute("error", "Hiba történt a törlés során.");
+/// /            return "redirect:/students/list";
+/// /        }
+/// /    }
 //
+
+import hu.nje.naplo.entity.Student;
+import hu.nje.naplo.service.StudentService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
 ////    @GetMapping("/classes")
 ////    public String getClasses(Model model) {
 ////        List<String> classes = StudentRepository.findByClassName();
@@ -84,3 +95,19 @@
 ////        return "add_student"; // A nézet neve
 ////    }
 //}
+
+@Controller
+@RequestMapping("/students")
+@RequiredArgsConstructor
+public class StudentController {
+
+    private final StudentService studentService;
+
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')")
+    @GetMapping
+    public String getSubjects(Model model) {
+        final List<Student> students = studentService.listStudents();
+        model.addAttribute("students", students);
+        return "students";
+    }
+}

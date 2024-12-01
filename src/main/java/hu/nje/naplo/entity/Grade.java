@@ -40,15 +40,14 @@ public class Grade extends AbstractEntity {
     private int subjectId;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "diakid",updatable = false, insertable = false)
     private Student student;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "targyid", updatable = false, insertable = false)
     private Subject subject;
-
 
     @Override
     public boolean equals(Object o) {
